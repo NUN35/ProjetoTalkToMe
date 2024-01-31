@@ -2,6 +2,8 @@
 import { useState } from "react";
 import Button from "./Button";
 import { Input } from "./Input";
+import { Join } from "./Join";
+import { Create } from "./Create";
 
 export function FormWrapper() {
     const [selectedRoom, setSelectedRoom] = useState<"join" | "create">("join");
@@ -30,10 +32,19 @@ export function FormWrapper() {
             </div>
 
             <div className=" bg-secondary py-4 rounded-b space-y-8 px-10">
-                <Input placeholder="Seu nome" type="text" />
-                <Input placeholder="Seu Id da reuniao" type="text" />
-                <Button title="Entrar" type="submit" />
+                <RoomSelector selectedRoom={selectedRoom} />
             </div>
         </div>
     );
 }
+
+const RoomSelector = ({ selectedRoom }: { selectedRoom: "join" | "create" }) => {
+    switch (selectedRoom) {
+        case "join":
+            return <Join />;
+        case "create":
+            return <Create />;
+        default:
+            <Join />;
+    }
+};
